@@ -1,0 +1,10 @@
+^C:\HACKATHON\INBOXINSIGHT\BUILD\WINDOWS\X64\CMAKEFILES\3A614FDA702886B4307CC95D2890FE3D\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

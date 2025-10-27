@@ -1,0 +1,34 @@
+[
+  {
+    "sender": "Flipkart",
+    "text": "Flat 30% off on home appliances. Offer valid till 22 Oct."
+  },
+  {
+    "sender": "Airtel",
+    "text": "Recharge \u20b9149 and get 1.5GB/day for 28 days. Offer valid 3 days."
+  },
+  {
+    "sender": "BankX",
+    "text": "Your credit card bill of \u20b92500 is due tomorrow."
+  },
+  {
+    "sender": "Netflix",
+    "text": "Your subscription will expire on 25 Oct. Renew now to avoid interruption."
+  },
+  {
+    "sender": "Foodie",
+    "text": "Buy 1 Get 1 free on orders above \u20b9399. Limited time."
+  },
+  {
+    "sender": "PayX",
+    "text": "INR 1200 credited to your account. Txn ID: 12345."
+  },
+  {
+    "sender": "Govt",
+    "text": "Important: Your PAN needs verification. Visit link."
+  },
+  {
+    "sender": "Airtel",
+    "text": "Get 2GB free for 7 days with this code."
+  }
+]

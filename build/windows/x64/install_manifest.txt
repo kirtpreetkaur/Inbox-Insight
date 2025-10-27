@@ -1,0 +1,17 @@
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/icudtl.dat
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/flutter_windows.dll
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/assets/animations/ai_brain.json
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/assets/icons/bill.png
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/assets/icons/offer.png
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/assets/icons/service.png
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/assets/icons/telecom.png
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/assets/mock_sms.json
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/NativeAssetsManifest.json
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+C:/Hackathon/InboxInsight/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag
