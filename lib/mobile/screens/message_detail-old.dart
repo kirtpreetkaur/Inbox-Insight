@@ -1,37 +1,133 @@
 import 'package:flutter/material.dart';
-import '../ai/ai_classifier.dart';
 import '../widgets/glass_card.dart';
 import 'package:inboxinsight/mobile/utils/mock_sms_data.dart';
-
-
 
 class MessageDetail extends StatelessWidget {
   final Message message;
   final String category;
-  MessageDetail({required this.message, required this.category});
+
+  const MessageDetail({required this.message, required this.category, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> actions = [];
-    if (category == 'Bills Due') {
-      actions.add(ElevatedButton.icon(onPressed: (){ showDialog(context: context, builder: (_)=>AlertDialog(title:Text('Payment'), content:Text('Fake payment processed.'), actions:[TextButton(onPressed: ()=>Navigator.pop(context), child:Text('OK'))])); }, icon: Icon(Icons.payment), label: Text('Pay Now')));
-    } else if (category == 'High-Value Offers') {
-      actions.add(ElevatedButton.icon(onPressed: (){ showDialog(context: context, builder: (_)=>AlertDialog(title:Text('Redeem'), content:Text('Fake redeem link opened.'), actions:[TextButton(onPressed: ()=>Navigator.pop(context), child:Text('OK'))])); }, icon: Icon(Icons.local_offer), label: Text('Redeem Offer')));
-    } else {
-      actions.add(TextButton(onPressed: (){}, child: Text('Ignore')));
+    // Choose background & primary colors based on category
+    Color bgColor;
+    IconData icon;
+    String actionText;
+
+    switch (category) {
+      case 'Bills Due':
+        bgColor = Colors.red[100]!;
+        icon = Icons.payment;
+        actionText = 'Pay Now';
+        break;
+      case 'Subscriptions':
+        bgColor = Colors.purple[100]!;
+        icon = Icons.autorenew;
+        actionText = 'Renew Now';
+        break;
+      case 'High-Value Offers':
+      case 'Offers':
+        bgColor = Colors.orange[100]!;
+        icon = Icons.local_offer;
+        actionText = 'Redeem Now';
+        break;
+      default:
+        bgColor = Colors.blue[100]!;
+        icon = Icons.message;
+        actionText = 'Accept';
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Message')),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('From: ' + message.sender, style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height:8),
-          Text(message.text),
-          SizedBox(height:16),
-          Row(children: actions)
-        ]),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.deepPurple),
+        title: const Text(
+          'Message Detail',
+          style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Center(
+        child: GlassCard(
+          child: Container(
+            width: 380,
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, size: 60, color: Colors.black87),
+                const SizedBox(height: 12),
+                Text(
+                  category,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  message.text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16, color: Colors.black87),
+                ),
+                const SizedBox(height: 20),
+
+                // Action buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple[400],
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      ),
+                      icon: const Icon(Icons.check_circle_outline),
+                      label: Text(actionText),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text(actionText),
+                            content: Text('Simulated action: "$actionText" executed.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 12),
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.deepPurple,
+                        side: const BorderSide(color: Colors.deepPurple),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      ),
+                      icon: const Icon(Icons.cancel_outlined),
+                      label: const Text('Ignore'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
