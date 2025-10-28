@@ -1,4 +1,4 @@
-// lib/mobile/widgets/glass_card.dart
+// lib/widgets/glass_card.dart
 import 'dart:ui';
 import 'package:flutter/material.dart';
 

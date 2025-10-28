@@ -27,3 +27,12 @@ flutter:
     - assets/icons/offer.png
     - assets/icons/service.png
     - assets/icons/telecom.png
+    - assets/images/delivery.jpeg
+    - assets/images/government.jpeg
+    - assets/images/healthcare.jpeg
+    - assets/images/offer.jpeg
+    - assets/images/others.jpeg
+    - assets/images/promotional.jpeg
+    - assets/images/service.jpeg
+    - assets/images/transactional.jpeg
+    - assets/images/travel.jpeg
