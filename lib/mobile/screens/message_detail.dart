@@ -6,122 +6,124 @@ class MessageDetail extends StatelessWidget {
   final Message message;
   final String category;
 
-  const MessageDetail({super.key, required this.message, required this.category});
+  const MessageDetail({required this.message, required this.category, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final String messageType = getMessageType(message.text);
-
-    // Pick a themed color based on message type
-    Color cardColor;
+    // Choose background & primary colors based on category
+    Color bgColor;
     IconData icon;
-    switch (messageType) {
-      case 'Offer':
-        cardColor = Colors.orangeAccent.withOpacity(0.3);
+    String actionText;
+
+    switch (category) {
+      case 'Bills Due':
+        bgColor = Colors.red[100]!;
+        icon = Icons.payment;
+        actionText = 'Pay Now';
+        break;
+      case 'Subscriptions':
+        bgColor = Colors.purple[100]!;
+        icon = Icons.autorenew;
+        actionText = 'Renew Now';
+        break;
+      case 'High-Value Offers':
+      case 'Offers':
+        bgColor = Colors.orange[100]!;
         icon = Icons.local_offer;
-        break;
-      case 'Transaction':
-        cardColor = Colors.greenAccent.withOpacity(0.3);
-        icon = Icons.account_balance_wallet;
-        break;
-      case 'Service':
-        cardColor = Colors.blueAccent.withOpacity(0.3);
-        icon = Icons.sim_card;
-        break;
-      case 'Reminder':
-        cardColor = Colors.redAccent.withOpacity(0.3);
-        icon = Icons.notification_important;
-        break;
-      case 'Government Notice':
-        cardColor = Colors.purpleAccent.withOpacity(0.3);
-        icon = Icons.gavel;
+        actionText = 'Redeem Now';
         break;
       default:
-        cardColor = Colors.grey.withOpacity(0.3);
-        icon = Icons.sms;
-    }
-
-    // Action button depending on message type
-    Widget actionButton;
-    if (messageType == 'Offer') {
-      actionButton = ElevatedButton.icon(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: const Text('Redeem Offer'),
-              content: const Text('Fake redeem link opened.'),
-              actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
-            ),
-          );
-        },
-        icon: const Icon(Icons.card_giftcard),
-        label: const Text('Redeem Now'),
-      );
-    } else if (messageType == 'Transaction') {
-      actionButton = ElevatedButton.icon(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: const Text('Payment'),
-              content: const Text('Fake payment confirmation.'),
-              actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
-            ),
-          );
-        },
-        icon: const Icon(Icons.payment),
-        label: const Text('View Transaction'),
-      );
-    } else if (messageType == 'Government Notice') {
-      actionButton = ElevatedButton.icon(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: const Text('Notice'),
-              content: const Text('Official link opened.'),
-              actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
-            ),
-          );
-        },
-        icon: const Icon(Icons.open_in_browser),
-        label: const Text('View Notice'),
-      );
-    } else {
-      actionButton = TextButton(onPressed: () {}, child: const Text('Close'));
+        bgColor = Colors.blue[100]!;
+        icon = Icons.message;
+        actionText = 'Accept';
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(message.sender),
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.deepPurple),
+        title: const Text(
+          'Message Detail',
+          style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
+        ),
       ),
-      backgroundColor: Colors.grey[200],
       body: Center(
         child: GlassCard(
-          blur: 20,
-          color: cardColor,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+          child: Container(
+            width: 380,
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))
+              ],
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(icon, size: 64, color: Colors.black87),
+                Icon(icon, size: 60, color: Colors.black87),
                 const SizedBox(height: 12),
                 Text(
-                  messageType,
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  category,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
                 Text(
                   message.text,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16, color: Colors.black87),
                 ),
-                const SizedBox(height: 16),
-                actionButton,
+                const SizedBox(height: 20),
+
+                // Action buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple[400],
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      ),
+                      icon: const Icon(Icons.check_circle_outline),
+                      label: Text(actionText),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text(actionText),
+                            content: Text('Simulated action: "$actionText" executed.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 12),
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.deepPurple,
+                        side: const BorderSide(color: Colors.deepPurple),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      ),
+                      icon: const Icon(Icons.cancel_outlined),
+                      label: const Text('Ignore'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
